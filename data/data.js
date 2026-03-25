@@ -397,7 +397,7 @@ const SG_RULES_DATA = {
           "label": "File and Serve Applicant\u2019s Reply Affidavit",
           "days": 7, "unit": "days",
           "reference": "Supreme Court Practice Directions 2021 (interlocutory hearings)",
-          "note": "Applicant\u2019s reply affidavit is typically due 7 days after service of the respondent\u2019s affidavit. As a period of 14 days or fewer in the Supreme Court, court vacation days are excluded from the count under O 2 r 4, Rules of Court 2021."
+          "note": "Applicant\u2019s reply affidavit is typically due 7 days after service of the respondent\u2019s affidavit. Court vacation days are not excluded from the count; the 7-day period runs in calendar/working days. If the deadline falls on a court vacation day (Supreme Court), it extends to the next working day (non-weekend/non-public holiday)."
         }
       ]
     },
@@ -416,7 +416,7 @@ const SG_RULES_DATA = {
           "label": "Allow Inspection of Documents",
           "days": 7, "unit": "days",
           "reference": "O 11 r 4(1), ROC 2021",
-          "note": "The serving party must allow inspection of the listed documents within 7 days of serving the List of Documents. As a period of 14 days or fewer in the Supreme Court, court vacation days are excluded from the count under O 2 r 4, Rules of Court 2021."
+          "note": "The serving party must allow inspection of the listed documents within 7 days of serving the List of Documents. Court vacation days are not excluded from the count. If the deadline falls on a court vacation day (Supreme Court), it extends to the next working day (non-weekend/non-public holiday)."
         }
       ]
     },
@@ -991,7 +991,7 @@ const SG_RULES_DATA = {
           "label": "File and Serve Defence",
           "days": 21, "unit": "days",
           "reference": "State Courts Civil Procedure Rules 2022 (mirroring O 6 r 7, Rules of Court 2021)",
-          "note": "Defendant must file and serve Defence within 21 days after service. Note: State Courts do not apply the vacation exclusion rule (O 2 r 4), so calendar days apply directly without pausing for court vacations."
+          "note": "Defendant must file and serve Defence within 21 days after service. Court vacation days are not excluded from the count; the 21-day period runs in calendar days. Court vacations have no effect on State Courts proceedings."
         }
       ]
     }

@@ -47,7 +47,7 @@
       for (const t of triggers) {
         const opt = document.createElement('option');
         opt.value = t.id;
-        opt.textContent = t.label;
+        opt.textContent = t.reference ? `${t.reference} — ${t.label}` : t.label;
         group.appendChild(opt);
       }
 
@@ -114,6 +114,8 @@
       new Date(triggerDateVal + 'T00:00:00').toLocaleDateString('en-SG', {
         weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
       });
+    const refEl = document.getElementById('results-trigger-ref');
+    if (refEl) refEl.textContent = trigger.reference || '';
 
     container.innerHTML = '';
 
@@ -254,7 +256,7 @@
       { cls: 'deadline',          label: 'Deadline',                      show: true },
       { cls: 'skipped-weekend',   label: 'Weekend (not counted)',         show: presentStatuses.has('skipped-weekend') },
       { cls: 'skipped-holiday',   label: 'Public holiday (not counted)',  show: presentStatuses.has('skipped-holiday') },
-      { cls: 'skipped-vacation',  label: 'Court vacation (not counted)',  show: presentStatuses.has('skipped-vacation') },
+      { cls: 'skipped-vacation',  label: 'Court vacation (last-day rule adjustment)',  show: presentStatuses.has('skipped-vacation') },
     ];
     for (const { cls, label, show } of legendDefs) {
       if (!show) continue;
@@ -277,8 +279,15 @@
       const skipParts = [];
       if (skippedWE > 0) skipParts.push(`${skippedWE} weekend day${skippedWE !== 1 ? 's' : ''}`);
       if (skippedPH > 0) skipParts.push(`${skippedPH} public holiday${skippedPH !== 1 ? 's' : ''}`);
-      if (skippedCV > 0) skipParts.push(`${skippedCV} court vacation day${skippedCV !== 1 ? 's' : ''}`);
-      summary.textContent = `${periodDesc} · ${totalSkipped} day${totalSkipped !== 1 ? 's' : ''} not counted (${skipParts.join(', ')}).`;
+      const notCounted = skippedWE + skippedPH;
+      let text = periodDesc;
+      if (notCounted > 0) {
+        text += ` · ${notCounted} day${notCounted !== 1 ? 's' : ''} not counted (${skipParts.join(', ')})`;
+      }
+      if (skippedCV > 0) {
+        text += `${notCounted > 0 ? ';' : ' ·'} deadline adjusted — original fell on court vacation day${skippedCV !== 1 ? 's' : ''}`;
+      }
+      summary.textContent = text + '.';
     } else {
       summary.textContent = `${periodDesc} · all calendar days counted.`;
     }

@@ -377,6 +377,32 @@ select optgroup {
   border-top: 1px solid var(--border-light);
 }
 
+/* ── Trigger reference line (under results header) ───────── */
+
+.results-ref {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 2px;
+  letter-spacing: 0.01em;
+}
+
+/* ── Results caveat ──────────────────────────────────────── */
+
+.results-caveat {
+  margin-top: 12px;
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--page-bg);
+  border: 1px solid var(--border-light);
+  line-height: 1.55;
+}
+
+.results-caveat strong {
+  color: var(--text);
+}
+
 /* ── Export bar ──────────────────────────────────────────── */
 
 .export-bar {

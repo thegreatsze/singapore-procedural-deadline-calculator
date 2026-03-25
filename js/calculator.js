@@ -10,14 +10,17 @@
  *  RULE 2 — Periods of 5 days or fewer (O 2 r 3, ROC 2021)
  *    Saturdays, Sundays, and public holidays are EXCLUDED from the count.
  *
- *  RULE 3 — Vacation exclusion for Supreme Court (O 2 r 4, ROC 2021)
- *    For SC proceedings where the period is ≤14 days: court vacation days are also
- *    excluded from the count (clock pauses during vacation).
- *    For periods >14 days: vacation days count; last-day rule still applies.
+ *  RULE 3 — Court vacation: last-day extension (Supreme Court only)
+ *    Court vacation days are NOT excluded from the counting period.
+ *    They are relevant only for the last-day rule: if the final day of the period
+ *    falls on a court vacation day (SC proceedings), the deadline extends to the
+ *    next working day (non-weekend, non-public holiday). That day may still fall
+ *    within a vacation period — the vacation does not block it.
  *
  *  RULE 4 — Last-day rule (Interpretation Act s 50(b))
- *    If the last day falls on a Saturday, Sunday, public holiday, or (SC) vacation
- *    day, the deadline extends to the next Registry-open day.
+ *    If the last day falls on a Saturday, Sunday, or public holiday, the deadline
+ *    extends to the next working day. For SC proceedings, a court vacation day on
+ *    the last day also triggers extension to the next working day (Rule 3).
  *
  *  RULE 5 — "Before" deadlines (e.g. 14 days before trial)
  *    If the cutoff falls on a non-filing day, it advances BACKWARDS to the
@@ -29,7 +32,7 @@
  *    "months" — calendar months (setMonth); always treated as >14 days, no vacation exclusion
  *
  *  NOTE ON STATE COURTS:
- *    The vacation exclusion rule (Rule 3) does NOT apply to State Courts proceedings.
+ *    Court vacation days have no effect on State Courts proceedings.
  */
 
 class DeadlineCalculator {
@@ -122,31 +125,15 @@ class DeadlineCalculator {
 
   /**
    * MODE A — Working-day count (periods ≤5 days)
-   * Skips weekends, public holidays, and (SC) vacation days.
+   * Skips weekends and public holidays. Court vacation days are NOT excluded
+   * from the count (they are only relevant for the last-day rule).
    */
-  _addWorkingDays(triggerDate, n, courtType) {
-    const skip = courtType === 'supreme'
-      ? d => this._isNonFilingDaySC(d)
-      : d => this._isNonFilingDayState(d);
+  _addWorkingDays(triggerDate, n) {
     let d = new Date(triggerDate);
     let counted = 0;
     while (counted < n) {
       d.setDate(d.getDate() + 1);
-      if (!skip(d)) counted++;
-    }
-    return d;
-  }
-
-  /**
-   * MODE B — Calendar days, excluding vacation (6–14 day SC periods)
-   * Counts calendar days but skips vacation days.
-   */
-  _addCalendarDaysExcludingVacation(triggerDate, n) {
-    let d = new Date(triggerDate);
-    let counted = 0;
-    while (counted < n) {
-      d.setDate(d.getDate() + 1);
-      if (!this._isInVacation(d)) counted++;
+      if (!this._isNonWorkingDay(d)) counted++;
     }
     return d;
   }
@@ -163,32 +150,39 @@ class DeadlineCalculator {
   // ─── Last-day adjustment (Rule 4) ─────────────────────────────────────────
 
   /**
-   * Apply the last-day rule: advance to next filing day if the date is blocked.
+   * Apply the last-day rule: advance to next working day if the date is blocked.
+   * A day is blocked if it is a weekend, a public holiday, or (SC only) a court
+   * vacation day. The next working day is the next non-weekend, non-public-holiday
+   * day — which may still fall within a court vacation period.
    * Returns { adjusted, wasAdjusted, reason }.
    */
   _applyLastDayRule(rawDate, courtType) {
-    const isNonFiling = courtType === 'supreme'
-      ? d => this._isNonFilingDaySC(d)
-      : d => this._isNonFilingDayState(d);
-
     let d = new Date(rawDate);
-    if (!isNonFiling(d)) return { adjusted: d, wasAdjusted: false, reason: null };
+    const isVacationBlocked = courtType === 'supreme' && this._isInVacation(d) && !this._isNonWorkingDay(d);
+
+    if (!this._isNonWorkingDay(d) && !isVacationBlocked) {
+      return { adjusted: d, wasAdjusted: false, reason: null };
+    }
 
     const originalReadable = this._formatReadable(rawDate);
     const reasons = [];
 
-    while (isNonFiling(d)) {
+    // If the day is a court vacation day (SC) but not a weekend/public holiday,
+    // advance by one day, then fall through to advance past any weekends/public holidays.
+    if (courtType === 'supreme' && this._isInVacation(d) && !this._isNonWorkingDay(d)) {
+      const vac = this._getVacation(d);
+      reasons.push(vac ? vac.name : 'court vacation');
+      d.setDate(d.getDate() + 1);
+    }
+
+    // Advance past any weekends and public holidays.
+    while (this._isNonWorkingDay(d)) {
       if (this._isWeekend(d)) {
         reasons.push('weekend');
-        d.setDate(d.getDate() + 1);
-      } else if (this._isPublicHoliday(d)) {
+      } else {
         reasons.push(this._holidayMap.get(this._formatDate(d)) || 'public holiday');
-        d.setDate(d.getDate() + 1);
-      } else if (this._isInVacation(d)) {
-        const vac = this._getVacation(d);
-        reasons.push(vac ? vac.name : 'court vacation');
-        d = this._dateAddDays(vac.end, 1); // jump to day after vacation
       }
+      d.setDate(d.getDate() + 1);
     }
 
     const reasonStr = `Original deadline (${originalReadable}) fell on: ${[...new Set(reasons)].join(', ')}`;
@@ -196,20 +190,30 @@ class DeadlineCalculator {
   }
 
   /**
-   * Apply the "before" last-day rule: retreat to previous filing day if blocked.
-   * Used for deadlines like "14 days before trial" — if cutoff is a non-filing day,
-   * the last opportunity is the filing day before it.
+   * Apply the "before" last-day rule: retreat to previous working day if blocked.
+   * Used for deadlines like "14 days before trial". A day is blocked if it is a
+   * weekend, a public holiday, or (SC only) a court vacation day. Retreats to the
+   * nearest preceding non-weekend, non-public-holiday day (which may still fall
+   * within a court vacation period).
    */
   _applyLastDayRuleBefore(rawDate, courtType) {
-    const isNonFiling = courtType === 'supreme'
-      ? d => this._isNonFilingDaySC(d)
-      : d => this._isNonFilingDayState(d);
-
     let d = new Date(rawDate);
-    if (!isNonFiling(d)) return { adjusted: d, wasAdjusted: false, reason: null };
+    const isVacationBlocked = courtType === 'supreme' && this._isInVacation(d) && !this._isNonWorkingDay(d);
+
+    if (!this._isNonWorkingDay(d) && !isVacationBlocked) {
+      return { adjusted: d, wasAdjusted: false, reason: null };
+    }
 
     const originalReadable = this._formatReadable(rawDate);
-    while (isNonFiling(d)) {
+
+    // If the day is a court vacation day (SC) but not a weekend/public holiday,
+    // retreat by one day, then fall through to retreat past any weekends/public holidays.
+    if (courtType === 'supreme' && this._isInVacation(d) && !this._isNonWorkingDay(d)) {
+      d.setDate(d.getDate() - 1);
+    }
+
+    // Retreat past any weekends and public holidays.
+    while (this._isNonWorkingDay(d)) {
       d.setDate(d.getDate() - 1);
     }
 
@@ -260,13 +264,8 @@ class DeadlineCalculator {
       rawDeadline = this._dateAddMonths(trigger, rule.days);
       computationMode = `${rule.days} calendar month${rule.days !== 1 ? 's' : ''}`;
     } else if (effectiveDays <= 5) {
-      rawDeadline = this._addWorkingDays(trigger, effectiveDays, court);
-      computationMode = court === 'supreme'
-        ? 'Working days (excluding weekends, public holidays, and court vacations)'
-        : 'Working days (excluding weekends and public holidays)';
-    } else if (effectiveDays <= 14 && court === 'supreme') {
-      rawDeadline = this._addCalendarDaysExcludingVacation(trigger, effectiveDays);
-      computationMode = 'Calendar days (court vacation days excluded — O 2 r 4, ROC 2021)';
+      rawDeadline = this._addWorkingDays(trigger, effectiveDays);
+      computationMode = 'Working days (excluding weekends and public holidays)';
     } else {
       rawDeadline = this._addCalendarDays(trigger, effectiveDays);
       computationMode = unit === 'weeks'
@@ -377,16 +376,12 @@ class DeadlineCalculator {
       } else if (direction === 'before' || unit === 'months') {
         status = 'counted';
       } else if (effectiveDays <= 5) {
-        // Mode A — working days
-        if (isWeekend)                                  status = 'skipped-weekend';
-        else if (isHoliday)                             status = 'skipped-holiday';
-        else if (court === 'supreme' && isVacation)     status = 'skipped-vacation';
-        else                                            status = 'counted';
-      } else if (effectiveDays <= 14 && court === 'supreme') {
-        // Mode B — calendar days, skip vacation
-        status = isVacation ? 'skipped-vacation' : 'counted';
+        // Mode A — working days (weekends and public holidays excluded; vacation days are NOT excluded)
+        if (isWeekend)        status = 'skipped-weekend';
+        else if (isHoliday)   status = 'skipped-holiday';
+        else                  status = 'counted';
       } else {
-        // Mode C — pure calendar
+        // Calendar days — all days counted (vacation days do not affect the count)
         status = 'counted';
       }
 

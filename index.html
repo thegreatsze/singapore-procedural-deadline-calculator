@@ -88,6 +88,7 @@
               &nbsp;on&nbsp;
               <strong id="results-trigger-date">—</strong>
             </div>
+            <div class="results-ref" id="results-trigger-ref"></div>
           </div>
         </div>
 
@@ -100,6 +101,11 @@
             📅 Export .ics File
           </button>
         </div>
+
+        <!-- Caveat -->
+        <div class="results-caveat">
+          <strong>Note:</strong> The above deadlines have been calculated based on a default, non-exceptional scenario under the Rules of Court 2021. This tool does not account for exceptions or special provisions that may separately be provided for under the Rules of Court 2021. You should verify all deadlines against the applicable rules and any court orders or directions in force.
+        </div>
       </div>
 
       <!-- Day-counting note -->
@@ -108,10 +114,9 @@
         <ul>
           <li><strong>Trigger day excluded:</strong> The period begins on the day <em>after</em> the triggering event (Interpretation Act s 50(a)).</li>
           <li><strong>Periods of 5 days or fewer (O 2 r 3):</strong> Saturdays, Sundays, and public holidays are <em>excluded</em> from the count (effectively working days).</li>
-          <li><strong>Supreme Court, periods of 6–14 days (O 2 r 4):</strong> Court vacation days are also <em>excluded</em> from the count (the clock pauses). The computation mode is shown under each deadline.</li>
-          <li><strong>Periods over 14 days:</strong> All calendar days count; months and weeks are calendar months/weeks.</li>
-          <li><strong>Last-day rule:</strong> If the final day falls on a weekend, public holiday, or (SC) court vacation day, it extends to the next Registry-open day. Adjusted deadlines are marked &#9888;.</li>
-          <li><strong>State Courts:</strong> Vacation exclusion does not apply. Only the ≤5 day rule and last-day rule apply.</li>
+          <li><strong>Periods over 5 days:</strong> All calendar days count; months and weeks are calendar months/weeks.</li>
+          <li><strong>Last-day rule:</strong> If the final day falls on a weekend or public holiday, it extends to the next working day. For Supreme Court proceedings, if the final day falls on a court vacation day, it likewise extends to the next working day (non-weekend/non-public holiday) — which may still fall within a vacation period. Adjusted deadlines are marked &#9888;.</li>
+          <li><strong>State Courts:</strong> Court vacation days have no effect. Only the ≤5 day working-day rule and the last-day rule (weekends/public holidays only) apply.</li>
           <li><strong>Cutoff deadlines (shown in brown):</strong> Some deadlines run <em>backwards</em> from a future date (e.g. last day to amend before trial). If the cutoff falls on a non-filing day, the preceding filing day is shown.</li>
         </ul>
       </div>
