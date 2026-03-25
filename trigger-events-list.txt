@@ -1,0 +1,97 @@
+SINGAPORE PROCEDURAL DEADLINE CALCULATOR
+Trigger Events — Drop-down List
+(As displayed: Reference — Label)
+Generated from data.js
+==========================================================
+
+PLEADINGS — ORIGINATING CLAIM TRACK
+-------------------------------------------------------------
+1.  O 6 rr 6–7, ROC 2021 — Service of Originating Claim + Statement of Claim — Defendant in Singapore
+2.  O 6 rr 6–7, ROC 2021 — Service of Originating Claim + Statement of Claim — Defendant outside Singapore
+3.  O 6 rr 5–6, ROC 2021 — Service of Generally-Endorsed Originating Claim (without full Statement of Claim)
+4.  O 6 r 7, ROC 2021 — Service of Statement of Claim (served separately after Notice of Intention to Contest filed)
+5.  O 6 r 8, ROC 2021 — Service of Defence
+6.  O 6 rr 8–9, ROC 2021 — Service of Defence and Counterclaim
+7.  State Courts Civil Procedure Rules 2022 — Service of Originating Claim — State Courts (District Court / Magistrates' Court)
+
+THIRD PARTY PROCEEDINGS
+-------------------------------------------------------------
+8.  O 10 rr 1, 4, ROC 2021 — Service of Third Party Notice — Third Party in Singapore
+9.  O 10 rr 1, 4, ROC 2021 — Service of Third Party Notice — Third Party outside Singapore
+
+CASE MANAGEMENT & SINGLE APPLICATION PENDING TRIAL
+-------------------------------------------------------------
+10. O 9 r 1, ROC 2021 — Issue of Originating Claim / Originating Application (to be served in Singapore)
+11. O 9 r 1, ROC 2021 — Issue of Originating Claim / Originating Application (to be served outside Singapore)
+12. O 9 rr 3, 7, ROC 2021 — Date of Case Conference (document exchange and Single Application Pending Trial directions made)
+13. O 9 r 7, ROC 2021 — Service of Single Application Pending Trial Summons and Supporting Affidavit (on Respondent)
+14. O 9 r 9(7); O 7 r 3, ROC 2021 — Date of Trial (to calculate pre-trial cutoff for applications and amendments)
+
+INTERLOCUTORY APPLICATIONS
+-------------------------------------------------------------
+15. O 9, ROC 2021; Supreme Court Practice Directions 2021 — Service of Summons / Interlocutory Application (outside Single Application Pending Trial framework)
+16. Supreme Court Practice Directions 2021 — Service of Respondent's Affidavit (Interlocutory Application)
+
+DISCOVERY & INSPECTION
+-------------------------------------------------------------
+17. O 11 r 4, ROC 2021 — Service of List of Documents
+
+ORIGINATING APPLICATION TRACK
+-------------------------------------------------------------
+18. O 6 rr 15–16, ROC 2021 — Service of Originating Application on Respondent
+19. O 6 r 16, ROC 2021 — Service of Respondent's Affidavit (Originating Application)
+
+APPEALS — HIGH COURT TO COURT OF APPEAL / APPELLATE DIVISION
+-------------------------------------------------------------
+20. O 17 r 4; O 19 r 8, ROC 2021; Legal Profession Act — Date of High Court Judge's Decision (General Division) — Appeal to Court of Appeal / Appellate Division
+21. O 19 rr 25–26, ROC 2021 — Date of High Court Judge's Decision — Permission to Appeal Required (to Court of Appeal / Appellate Division)
+22. O 19 r 26, ROC 2021 — Date Permission to Appeal Granted (to Court of Appeal / Appellate Division)
+23. O 19 rr 30–31, ROC 2021; Supreme Court Practice Directions 2021 — Filing of Notice of Appeal (to Court of Appeal / Appellate Division)
+24. O 19 r 31, ROC 2021 — Service of Record of Appeal and Appellant's Case (Court of Appeal / Appellate Division track)
+25. O 19 r 32, ROC 2021 — Service of Respondent's Case (Court of Appeal / Appellate Division track)
+
+APPEALS — STATE COURTS TO HIGH COURT
+-------------------------------------------------------------
+26. O 19 r 14, ROC 2021; State Courts Act — Date of Final Judgment / Order — State Courts (District Court or Magistrates' Court)
+27. O 18 r 24, ROC 2021; State Courts Act — Date of Interlocutory Decision — State Courts (District Court or Magistrates' Court)
+28. O 18 r 25, ROC 2021 — State Courts Refusal of Permission to Appeal
+29. O 19 rr 15–17, ROC 2021 — Filing of Notice of Appeal (State Courts to High Court General Division)
+30. O 19 r 17, ROC 2021 — Service of Record of Appeal and Appellant's Case (State Courts to High Court track)
+
+APPEALS — REGISTRAR, PERMISSION & CROSS-APPEAL
+-------------------------------------------------------------
+31. O 18 r 17, ROC 2021 — Date of Registrar's Decision / Order
+32. O 19 r 33, ROC 2021 — Service of Opponent's Notice of Appeal (for Cross-Appeal)
+33. O 19 r 4, ROC 2021 — Date of Trial Merits Determination (High Court) — Costs Not Yet Determined
+
+ENFORCEMENT OF JUDGMENTS
+-------------------------------------------------------------
+34. O 22 r 2, ROC 2021 — Service of Court Order / Judgment on Judgment Debtor
+35. O 22 r 8, ROC 2021 — Service of Notice of Seizure — Movable Property
+36. O 22 r 9, ROC 2021 — Service of Notice of Seizure — Immovable Property
+37. O 22 r 10, ROC 2021 — Service of Notice of Seizure / Attachment on Third Party
+38. O 22 r 10, ROC 2021 — Receipt of Third Party Objection by Enforcement Applicant
+
+COMMITTAL PROCEEDINGS
+-------------------------------------------------------------
+39. O 23 r 4, ROC 2021 — Grant of Permission to Apply for Order of Committal
+
+COSTS & ASSESSMENT
+-------------------------------------------------------------
+40. O 21 r 5, ROC 2021 — Date of Order for Costs to Be Assessed (or Conclusion of Proceedings)
+41. O 21 r 20, ROC 2021; Supreme Court Practice Directions 2021 Part 15 — Assessment Hearing Date (for Bill of Costs objection deadline)
+
+ARBITRATION (COURT PROCEEDINGS)
+-------------------------------------------------------------
+42. International Arbitration Act (Cap 143A) s 24; Arbitration Act (Cap 10) s 48 — Date of Receipt of Arbitral Award
+
+TRIBUNALS (SMALL CLAIMS TRIBUNAL / EMPLOYMENT CLAIMS TRIBUNAL)
+-------------------------------------------------------------
+43. Small Claims Tribunals Act (Cap 308) s 38 — Date of Small Claims Tribunal Order
+44. Employment Claims Act 2016 (Cap 91A) s 24 — Date of Employment Claims Tribunal Order
+45. Employment Claims Act 2016 — Grant of Permission to Appeal Employment Claims Tribunal Order
+
+OTHER / VALIDITY / PRE-ACTION
+-------------------------------------------------------------
+46. O 6 r 3, ROC 2021 — Date of Issue of Originating Claim or Originating Application
+47. O 3 r 4, ROC 2021 — Date Consent to Extend Time for Filing a Pleading / Document Is Given

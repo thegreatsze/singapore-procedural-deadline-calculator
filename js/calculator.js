@@ -1,38 +1,33 @@
 /**
  * Singapore Procedural Deadline Calculator — Core Engine
- * Rules of Court 2021 (ROC 2021, S 914/2021) + Interpretation Act (Cap 1)
+ * Rules of Court 2021 (ROC 2021, S 914/2021)
  *
- * DAY-COUNTING RULES (O 2 rr 2–4, ROC 2021; Interpretation Act s 50):
+ * DAY-COUNTING RULES (O 3 r 3, ROC 2021):
  *
- *  RULE 1 — Trigger day excluded (Interpretation Act s 50(a))
+ *  RULE 1 — Trigger day excluded (O 3 r 3(3), ROC 2021)
  *    The day of the triggering event is NOT counted. Time runs from the next day.
  *
- *  RULE 2 — Periods of 5 days or fewer (O 2 r 3, ROC 2021)
- *    Saturdays, Sundays, and public holidays are EXCLUDED from the count.
+ *  RULE 2 — Periods of 6 days or fewer (O 3 r 3(6), ROC 2021)
+ *    Saturdays, Sundays, and public holidays ("non-court days") are EXCLUDED from the count.
+ *    "Non-court day" means a Saturday, Sunday or public holiday (ROC 2021 definitions).
  *
- *  RULE 3 — Court vacation: last-day extension (Supreme Court only)
- *    Court vacation days are NOT excluded from the counting period.
- *    They are relevant only for the last-day rule: if the final day of the period
- *    falls on a court vacation day (SC proceedings), the deadline extends to the
- *    next working day (non-weekend, non-public holiday). That day may still fall
- *    within a vacation period — the vacation does not block it.
- *
- *  RULE 4 — Last-day rule (Interpretation Act s 50(b))
+ *  RULE 3 — Last-day rule (O 3 r 3(7), ROC 2021)
  *    If the last day falls on a Saturday, Sunday, or public holiday, the deadline
- *    extends to the next working day. For SC proceedings, a court vacation day on
- *    the last day also triggers extension to the next working day (Rule 3).
+ *    extends to the next working day.
  *
- *  RULE 5 — "Before" deadlines (e.g. 14 days before trial)
- *    If the cutoff falls on a non-filing day, it advances BACKWARDS to the
- *    preceding filing day (you must act before the cut-off, not after it).
+ *  RULE 4 — "Before" deadlines (e.g. 14 days before trial)
+ *    If the cutoff falls on a non-court day, it retreats BACKWARDS to the
+ *    preceding working day (you must act before the cut-off, not after it).
+ *
+ *  RULE 5 — Clear days (O 3 r 3(5), ROC 2021)
+ *    Where a rule requires an act to be done a specified number of clear days
+ *    before or after a date, at least that number of days must intervene between
+ *    the day on which the act is done and that date.
  *
  *  PERIOD UNITS:
  *    "days"   — calendar days (default)
  *    "weeks"  — converted to days (×7), then same rules apply
- *    "months" — calendar months (setMonth); always treated as >14 days, no vacation exclusion
- *
- *  NOTE ON STATE COURTS:
- *    Court vacation days have no effect on State Courts proceedings.
+ *    "months" — calendar months (setMonth); always treated as >6 days
  */
 
 class DeadlineCalculator {
@@ -139,7 +134,7 @@ class DeadlineCalculator {
   }
 
   /**
-   * MODE C — Pure calendar days (periods >14 days, or State Courts periods >5 days)
+   * MODE C — Pure calendar days (periods >6 days)
    */
   _addCalendarDays(triggerDate, n) {
     const d = new Date(triggerDate);
@@ -263,9 +258,9 @@ class DeadlineCalculator {
       // Calendar months — always pure calendar, no day-exclusion modes
       rawDeadline = this._dateAddMonths(trigger, rule.days);
       computationMode = `${rule.days} calendar month${rule.days !== 1 ? 's' : ''}`;
-    } else if (effectiveDays <= 5) {
+    } else if (effectiveDays <= 6) {
       rawDeadline = this._addWorkingDays(trigger, effectiveDays);
-      computationMode = 'Working days (excluding weekends and public holidays)';
+      computationMode = 'Working days (excluding weekends and public holidays) — O 3 r 3(6), ROC 2021';
     } else {
       rawDeadline = this._addCalendarDays(trigger, effectiveDays);
       computationMode = unit === 'weeks'
@@ -375,8 +370,8 @@ class DeadlineCalculator {
         else                  status = 'counted'; // fallback
       } else if (direction === 'before' || unit === 'months') {
         status = 'counted';
-      } else if (effectiveDays <= 5) {
-        // Mode A — working days (weekends and public holidays excluded; vacation days are NOT excluded)
+      } else if (effectiveDays <= 6) {
+        // Mode A — working days (O 3 r 3(6)); only weekends and public holidays excluded
         if (isWeekend)        status = 'skipped-weekend';
         else if (isHoliday)   status = 'skipped-holiday';
         else                  status = 'counted';

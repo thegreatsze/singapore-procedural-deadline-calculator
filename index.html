@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Singapore Procedural Deadline Calculator</title>
-  <meta name="description" content="Calculate Singapore civil procedure deadlines under the Rules of Court 2021, excluding weekends, public holidays, and court vacations." />
+  <meta name="description" content="Calculate Singapore civil procedure deadlines under the Rules of Court 2021, excluding weekends and public holidays." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" />
@@ -28,7 +28,7 @@
   <div class="disclaimer">
     <strong>Disclaimer:</strong> This tool is provided for general reference purposes only and does not constitute legal advice of any kind.
     You should always verify all deadlines independently against the current Rules of Court 2021 and any applicable Practice Directions
-    issued by the Singapore courts. Court vacation dates and public holiday dates listed here are indicative only — please confirm
+    issued by the Singapore courts. Court vacation dates listed here are indicative only — please confirm
     the applicable dates directly at <a href="https://www.judiciary.gov.sg" target="_blank" rel="noopener" style="color:inherit;">judiciary.gov.sg</a>
     before acting on any deadline. If you are in any doubt as to the applicable deadline or procedure, you should consult a qualified Singapore lawyer.
     <br><br>
@@ -66,7 +66,7 @@
         <input type="date" id="trigger-date" />
         <p class="helper-text">
           Enter the actual date on which the trigger event occurred (e.g., date of service, date of judgment).
-          The period is counted from the <em>following</em> day (O 3 r 2, ROC 2021).
+          The period is counted from the <em>following</em> day (O 3 r 3(3), ROC 2021).
         </p>
       </div>
 
@@ -110,14 +110,14 @@
 
       <!-- Day-counting note -->
       <div class="info-card">
-        <h3>How deadlines are calculated (O 2, ROC 2021 + Interpretation Act)</h3>
+        <h3>How deadlines are calculated (O 3, ROC 2021)</h3>
         <ul>
-          <li><strong>Trigger day excluded:</strong> The period begins on the day <em>after</em> the triggering event (Interpretation Act s 50(a)).</li>
-          <li><strong>Periods of 5 days or fewer (O 2 r 3):</strong> Saturdays, Sundays, and public holidays are <em>excluded</em> from the count (effectively working days).</li>
-          <li><strong>Periods over 5 days:</strong> All calendar days count; months and weeks are calendar months/weeks.</li>
-          <li><strong>Last-day rule:</strong> If the final day falls on a weekend or public holiday, it extends to the next working day. For Supreme Court proceedings, if the final day falls on a court vacation day, it likewise extends to the next working day (non-weekend/non-public holiday) — which may still fall within a vacation period. Adjusted deadlines are marked &#9888;.</li>
-          <li><strong>State Courts:</strong> Court vacation days have no effect. Only the ≤5 day working-day rule and the last-day rule (weekends/public holidays only) apply.</li>
-          <li><strong>Cutoff deadlines (shown in brown):</strong> Some deadlines run <em>backwards</em> from a future date (e.g. last day to amend before trial). If the cutoff falls on a non-filing day, the preceding filing day is shown.</li>
+          <li><strong>Trigger day excluded (O 3 r 3(3)):</strong> The period begins on the day <em>after</em> the triggering event. The trigger date itself is not counted.</li>
+          <li><strong>Periods of 6 days or fewer (O 3 r 3(6)):</strong> Saturdays, Sundays, and public holidays are <em>excluded</em> from the count (effectively working days). "Non-court day" means a Saturday, Sunday or public holiday.</li>
+          <li><strong>Periods over 6 days:</strong> All calendar days count; months and weeks are calendar months/weeks.</li>
+          <li><strong>Clear days rule (O 3 r 3(5)):</strong> Where a rule requires an act to be done a specified number of <em>clear days</em> before or after a date, at least that number of days must intervene between the day on which the act is done and that date (i.e. both the act day and the specified date are excluded from the count).</li>
+          <li><strong>Last-day rule (O 3 r 3(7)):</strong> If the final day falls on a Saturday, Sunday, or public holiday, the deadline extends to the next working day. Adjusted deadlines are marked &#9888;.</li>
+          <li><strong>Cutoff deadlines (shown in brown):</strong> Some deadlines run <em>backwards</em> from a future date (e.g. last day to amend before trial). If the cutoff falls on a non-court day, the preceding working day is shown.</li>
         </ul>
       </div>
     </div>

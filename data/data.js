@@ -31,7 +31,7 @@ const SG_HOLIDAYS_DATA = {
       { "date": "2026-01-01", "name": "New Year's Day" },
       { "date": "2026-02-17", "name": "Chinese New Year (Day 1)" },
       { "date": "2026-02-18", "name": "Chinese New Year (Day 2)" },
-      { "date": "2026-03-20", "name": "Hari Raya Puasa" },
+      { "date": "2026-03-21", "name": "Hari Raya Puasa (Saturday)" },
       { "date": "2026-04-03", "name": "Good Friday" },
       { "date": "2026-05-01", "name": "Labour Day" },
       { "date": "2026-05-27", "name": "Hari Raya Haji" },
@@ -221,21 +221,21 @@ const SG_RULES_DATA = {
       "id": "service_third_party_notice_in_sg",
       "label": "Service of Third Party Notice \u2014 Third Party in Singapore",
       "category": "third_party",
-      "reference": "O 10 rr 1, 4, ROC 2021",
+      "reference": "O 10 r 3, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "tp_nic_in_sg",
           "label": "Third Party: File and Serve Notice of Intention to Contest",
           "days": 14, "unit": "days",
-          "reference": "O 10 r 1(1), ROC 2021",
-          "note": "Third Party served in Singapore must file the Notice of Intention to Contest within 14 days, mirroring the standard rule under O 6 r 6."
+          "reference": "O 10 r 3(1), ROC 2021",
+          "note": "Third Party served in Singapore must file the Notice of Intention to Contest within 14 days after service of the Third Party Notice."
         },
         {
           "id": "tp_defence_in_sg",
           "label": "Third Party: File and Serve Defence",
           "days": 21, "unit": "days",
-          "reference": "O 10 r 4(1), ROC 2021",
+          "reference": "O 10 r 3, ROC 2021",
           "note": "Third Party served in Singapore must file Defence within 21 days after service of the Third Party claim."
         }
       ]
@@ -245,21 +245,21 @@ const SG_RULES_DATA = {
       "id": "service_third_party_notice_outside_sg",
       "label": "Service of Third Party Notice \u2014 Third Party outside Singapore",
       "category": "third_party",
-      "reference": "O 10 rr 1, 4, ROC 2021",
+      "reference": "O 10 r 3, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "tp_nic_outside_sg",
           "label": "Third Party: File and Serve Notice of Intention to Contest",
           "days": 21, "unit": "days",
-          "reference": "O 10 r 1(2), ROC 2021",
+          "reference": "O 10 r 3(2), ROC 2021",
           "note": "Third Party served outside Singapore must file the Notice of Intention to Contest within 21 days, or as ordered in the leave to serve out order."
         },
         {
           "id": "tp_defence_outside_sg",
           "label": "Third Party: File and Serve Defence",
           "days": 5, "unit": "weeks",
-          "reference": "O 10 r 4(2), ROC 2021",
+          "reference": "O 10 r 3, ROC 2021",
           "note": "Third Party served outside Singapore must file Defence within 5 weeks (35 days) after service of the Third Party claim."
         }
       ]
@@ -305,21 +305,21 @@ const SG_RULES_DATA = {
       "id": "case_conference_direction",
       "label": "Date of Case Conference (document exchange and Single Application Pending Trial directions made)",
       "category": "case_mgmt",
-      "reference": "O 9 rr 3, 7, ROC 2021",
+      "reference": "O 9 r 9, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "document_exchange",
           "label": "Exchange List and Copies of Relevant Documents",
           "days": 14, "unit": "days",
-          "reference": "O 9 r 3; O 11 r 2, ROC 2021",
+          "reference": "O 9 r 9; O 11 r 2, ROC 2021",
           "note": "Following the Case Conference, parties are typically directed to exchange their lists and copies of all relevant documents within 14 days. The court\u2019s actual direction controls."
         },
         {
           "id": "sapt_application",
           "label": "Single Application Pending Trial Applicant: File Summons and Supporting Affidavit",
           "days": 21, "unit": "days",
-          "reference": "O 9 r 7(1), ROC 2021",
+          "reference": "O 9 r 9, ROC 2021",
           "note": "Where a Single Application Pending Trial direction is made at the Case Conference, the applicant must file and serve the summons and supporting affidavit within 21 days. All interlocutory applications (discovery, summary judgment, security for costs, etc.) must be consolidated into this single application."
         }
       ]
@@ -329,14 +329,14 @@ const SG_RULES_DATA = {
       "id": "service_sapt_affidavit",
       "label": "Service of Single Application Pending Trial Summons and Supporting Affidavit (on Respondent)",
       "category": "case_mgmt",
-      "reference": "O 9 r 7, ROC 2021",
+      "reference": "O 9 r 9, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "sapt_respondent_affidavit",
           "label": "Single Application Pending Trial Respondent: File and Serve Affidavit in Reply",
           "days": 21, "unit": "days",
-          "reference": "O 9 r 7(2), ROC 2021",
+          "reference": "O 9 r 9, ROC 2021",
           "note": "The respondent to the Single Application Pending Trial must file and serve their affidavit in reply within 21 days after service of the applicant\u2019s summons and supporting affidavit."
         }
       ]
@@ -397,7 +397,7 @@ const SG_RULES_DATA = {
           "label": "File and Serve Applicant\u2019s Reply Affidavit",
           "days": 7, "unit": "days",
           "reference": "Supreme Court Practice Directions 2021 (interlocutory hearings)",
-          "note": "Applicant\u2019s reply affidavit is typically due 7 days after service of the respondent\u2019s affidavit. Court vacation days are not excluded from the count; the 7-day period runs in calendar/working days. If the deadline falls on a court vacation day (Supreme Court), it extends to the next working day (non-weekend/non-public holiday)."
+          "note": "Applicant\u2019s reply affidavit is typically due 7 days after service of the respondent\u2019s affidavit. As a period of 6 days or fewer, any non-court days (Saturdays, Sundays, and public holidays) are excluded from the count under O 3 r 3(6), ROC 2021. Confirm with any specific court directions."
         }
       ]
     },
@@ -416,7 +416,7 @@ const SG_RULES_DATA = {
           "label": "Allow Inspection of Documents",
           "days": 7, "unit": "days",
           "reference": "O 11 r 4(1), ROC 2021",
-          "note": "The serving party must allow inspection of the listed documents within 7 days of serving the List of Documents. Court vacation days are not excluded from the count. If the deadline falls on a court vacation day (Supreme Court), it extends to the next working day (non-weekend/non-public holiday)."
+          "note": "The serving party must allow inspection of the listed documents within 7 days of serving the List of Documents. As a period of 6 days or fewer, any non-court days (Saturdays, Sundays, and public holidays) are excluded from the count under O 3 r 3(6), ROC 2021."
         }
       ]
     },
@@ -427,14 +427,14 @@ const SG_RULES_DATA = {
       "id": "service_oa",
       "label": "Service of Originating Application on Respondent",
       "category": "oa_track",
-      "reference": "O 6 rr 15\u201316, ROC 2021",
+      "reference": "O 6 r 12, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "respondent_affidavit_oa",
           "label": "File and Serve Respondent\u2019s Affidavit",
           "days": 21, "unit": "days",
-          "reference": "O 6 r 16(1), ROC 2021",
+          "reference": "O 6 r 12, ROC 2021",
           "note": "Respondent must file and serve their affidavit(s) in reply within 21 days after service of the Originating Application and supporting affidavit."
         }
       ]
@@ -444,14 +444,14 @@ const SG_RULES_DATA = {
       "id": "service_respondent_affidavit_oa",
       "label": "Service of Respondent\u2019s Affidavit (Originating Application)",
       "category": "oa_track",
-      "reference": "O 6 r 16, ROC 2021",
+      "reference": "O 6 r 12, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "applicant_reply_affidavit_oa",
           "label": "File and Serve Applicant\u2019s Reply Affidavit (if any)",
           "days": 14, "unit": "days",
-          "reference": "O 6 r 16(2), ROC 2021",
+          "reference": "O 6 r 12, ROC 2021",
           "note": "Applicant\u2019s reply affidavit (if any) must be filed within 14 days of service of the respondent\u2019s affidavit."
         }
       ]
@@ -463,21 +463,21 @@ const SG_RULES_DATA = {
       "id": "hc_judgment_for_ca_appeal",
       "label": "Date of High Court Judge\u2019s Decision (General Division) \u2014 Appeal to Court of Appeal / Appellate Division",
       "category": "appeals_hc_ca",
-      "reference": "O 17 r 4; O 19 r 8, ROC 2021; Legal Profession Act",
+      "reference": "O 19 r 4; O 19 r 25, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "further_arguments",
           "label": "Request Further Arguments (where required before appealing interlocutory orders)",
           "days": 14, "unit": "days",
-          "reference": "O 17 r 4; Legal Profession Act s 34(1)(c)",
+          "reference": "Legal Profession Act s 34(1)(c)",
           "note": "For certain interlocutory orders from the General Division, a party must request further arguments from the judge within 14 days of the order before becoming entitled to appeal. The appeal period then runs from the date the judge certifies no further arguments are required (or 14 days after the request if no response). Not required for all orders \u2014 check applicability."
         },
         {
           "id": "notice_of_appeal_hc_to_ca",
           "label": "File Notice of Appeal to Court of Appeal / Appellate Division",
           "days": 28, "unit": "days",
-          "reference": "O 19 r 8(1), ROC 2021",
+          "reference": "O 19 r 25, ROC 2021",
           "note": "Notice of Appeal must be filed within 28 days of the High Court Judge\u2019s decision (including any costs determination, or after expiry of the 30-day costs window if costs are not yet determined). Under the Rules of Court 2021 this is 28 days, not 30 days as under the former Rules of Court."
         }
       ]
@@ -851,14 +851,14 @@ const SG_RULES_DATA = {
       "id": "service_bill_of_costs",
       "label": "Assessment Hearing Date (for Bill of Costs objection deadline)",
       "category": "costs",
-      "reference": "O 21 r 20, ROC 2021; Supreme Court Practice Directions 2021 Part 15",
+      "reference": "Supreme Court Practice Directions 2021 Part 15",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "notice_of_dispute",
           "label": "Last Day to File Notice of Dispute / Objections to Bill of Costs",
           "days": 14, "unit": "days", "direction": "before",
-          "reference": "O 21 r 20; Supreme Court Practice Directions 2021 para 133",
+          "reference": "Supreme Court Practice Directions 2021 para 133",
           "note": "The paying party must file their Notice of Dispute (objections in principle or as to quantum) at least 14 days before the scheduled assessment hearing. Enter the hearing date to find the last day to file the Notice of Dispute."
         }
       ]
@@ -959,15 +959,15 @@ const SG_RULES_DATA = {
       "id": "consent_extension_of_time",
       "label": "Date Consent to Extend Time for Filing a Pleading / Document Is Given",
       "category": "other",
-      "reference": "O 2 r 1, ROC 2021",
+      "reference": "O 3 r 4, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "consent_extension_expiry",
           "label": "Expiry of Consent Extension Period",
           "days": 14, "unit": "days",
-          "reference": "O 2 r 1(1), ROC 2021",
-          "note": "Parties may consent in writing to extend time for filing or serving a pleading or document. Any single consent extension may not exceed 14 days, and only one consent extension is permitted per deadline. Any further extension requires a court order under O 2 r 2."
+          "reference": "O 3 r 4(3), ROC 2021",
+          "note": "Parties may consent in writing to extend time for filing or serving a pleading or document. Any single consent extension may not exceed 14 days, and only one consent extension is permitted per deadline. Any further extension requires a court order under O 3 r 4."
         }
       ]
     },
@@ -991,7 +991,7 @@ const SG_RULES_DATA = {
           "label": "File and Serve Defence",
           "days": 21, "unit": "days",
           "reference": "State Courts Civil Procedure Rules 2022 (mirroring O 6 r 7, Rules of Court 2021)",
-          "note": "Defendant must file and serve Defence within 21 days after service. Court vacation days are not excluded from the count; the 21-day period runs in calendar days. Court vacations have no effect on State Courts proceedings."
+          "note": "Defendant must file and serve Defence within 21 days after service. As a period of more than 6 days, all calendar days count (O 3 r 3, ROC 2021). Only the last-day rule applies: if the deadline falls on a Saturday, Sunday, or public holiday, it extends to the next working day."
         }
       ]
     }
