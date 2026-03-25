@@ -1,0 +1,112 @@
+{
+  "_comment": "Singapore Public Holidays and Supreme Court Vacation Periods. Update annually.",
+  "_sources": [
+    "Ministry of Manpower: https://www.mom.gov.sg/employment-practices/public-holidays",
+    "Singapore Courts: https://www.judiciary.gov.sg/civil/court-vacation",
+    "Public Holidays Act (Cap 246)",
+    "Rules of Court 2021, O 2 r 3-4"
+  ],
+  "_substitutePHNote": "When a public holiday falls on a Sunday, the following Monday is a gazetted substitute public holiday (Public Holidays Act s 4). When it falls on a Saturday, the following Monday is typically gazetted as the substitute.",
+
+  "publicHolidays": {
+    "2025": [
+      { "date": "2025-01-01", "name": "New Year's Day" },
+      { "date": "2025-01-29", "name": "Chinese New Year (Day 1)" },
+      { "date": "2025-01-30", "name": "Chinese New Year (Day 2)" },
+      { "date": "2025-03-31", "name": "Hari Raya Puasa" },
+      { "date": "2025-04-18", "name": "Good Friday" },
+      { "date": "2025-05-01", "name": "Labour Day" },
+      { "date": "2025-05-12", "name": "Vesak Day" },
+      { "date": "2025-06-07", "name": "Hari Raya Haji (Saturday)" },
+      { "date": "2025-06-09", "name": "Hari Raya Haji (substitute — Monday)" },
+      { "date": "2025-08-09", "name": "National Day (Saturday)" },
+      { "date": "2025-08-11", "name": "National Day (substitute — Monday)" },
+      { "date": "2025-10-20", "name": "Deepavali" },
+      { "date": "2025-12-25", "name": "Christmas Day" }
+    ],
+    "2026": [
+      { "date": "2026-01-01", "name": "New Year's Day" },
+      { "date": "2026-02-17", "name": "Chinese New Year (Day 1)" },
+      { "date": "2026-02-18", "name": "Chinese New Year (Day 2)" },
+      { "date": "2026-03-20", "name": "Hari Raya Puasa" },
+      { "date": "2026-04-03", "name": "Good Friday" },
+      { "date": "2026-05-01", "name": "Labour Day" },
+      { "date": "2026-05-27", "name": "Hari Raya Haji" },
+      { "date": "2026-05-31", "name": "Vesak Day (Sunday)" },
+      { "date": "2026-06-01", "name": "Vesak Day (substitute — Monday)" },
+      { "date": "2026-08-09", "name": "National Day (Sunday)" },
+      { "date": "2026-08-10", "name": "National Day (substitute — Monday)" },
+      { "date": "2026-11-08", "name": "Deepavali (Sunday)" },
+      { "date": "2026-11-09", "name": "Deepavali (substitute — Monday)" },
+      { "date": "2026-12-25", "name": "Christmas Day" }
+    ]
+  },
+
+  "_courtVacationsNote": "Supreme Court vacation periods — during these periods, for proceedings in the Supreme Court (General Division and Court of Appeal): (a) for time periods of 14 days or less, vacation days are excluded from the computation (O 2 r 4, ROC 2021); (b) if the last day of ANY period falls within a vacation, it is extended to the first Registry-open day after the vacation. State Courts do NOT have equivalent vacation exclusion rules. Dates below are based on standard patterns — ALWAYS verify current-year dates at https://www.judiciary.gov.sg/civil/court-vacation before relying on them.",
+  "courtVacations": {
+    "2025": [
+      {
+        "name": "Chinese New Year Vacation 2025",
+        "start": "2025-01-28",
+        "end": "2025-01-31",
+        "note": "Around Chinese New Year (29–30 Jan 2025). Approximate dates — verify at judiciary.gov.sg."
+      },
+      {
+        "name": "March Vacation 2025",
+        "start": "2025-03-17",
+        "end": "2025-03-28",
+        "note": "Approximate 2-week March vacation. Verify exact dates at judiciary.gov.sg."
+      },
+      {
+        "name": "June/July Vacation 2025",
+        "start": "2025-05-28",
+        "end": "2025-06-25",
+        "note": "Approximate ~4-week long vacation. Verify exact dates at judiciary.gov.sg."
+      },
+      {
+        "name": "September Vacation 2025",
+        "start": "2025-09-01",
+        "end": "2025-09-12",
+        "note": "Approximate 2-week September vacation. Verify exact dates at judiciary.gov.sg."
+      },
+      {
+        "name": "Year-End Vacation 2025",
+        "start": "2025-11-24",
+        "end": "2025-12-05",
+        "note": "Approximate year-end vacation. Verify exact dates at judiciary.gov.sg."
+      }
+    ],
+    "2026": [
+      {
+        "name": "Chinese New Year Vacation 2026",
+        "start": "2026-02-16",
+        "end": "2026-02-19",
+        "note": "Around Chinese New Year (17–18 Feb 2026). Approximate — verify at judiciary.gov.sg."
+      },
+      {
+        "name": "March Vacation 2026",
+        "start": "2026-03-16",
+        "end": "2026-03-27",
+        "note": "Approximate 2-week March vacation. Verify exact dates at judiciary.gov.sg."
+      },
+      {
+        "name": "June/July Vacation 2026",
+        "start": "2026-05-27",
+        "end": "2026-06-24",
+        "note": "Approximate ~4-week long vacation. Verify exact dates at judiciary.gov.sg."
+      },
+      {
+        "name": "September Vacation 2026",
+        "start": "2026-08-31",
+        "end": "2026-09-11",
+        "note": "Approximate 2-week September vacation. Verify exact dates at judiciary.gov.sg."
+      },
+      {
+        "name": "Year-End Vacation 2026",
+        "start": "2026-11-23",
+        "end": "2026-12-04",
+        "note": "Approximate year-end vacation. Verify exact dates at judiciary.gov.sg."
+      }
+    ]
+  }
+}
