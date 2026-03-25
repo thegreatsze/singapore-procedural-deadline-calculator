@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Singapore Procedural Deadline Calculator</title>
+  <meta name="description" content="Calculate Singapore civil procedure deadlines under the Rules of Court 2021, excluding weekends, public holidays, and court vacations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-icon" title="Singapore Judiciary">⚖</div>
+    <div class="header-text">
+      <h1>Singapore Procedural Deadline Calculator</h1>
+      <p>Rules of Court 2021 &nbsp;·&nbsp; Singapore Civil Procedure</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> This tool is provided for general reference purposes only and does not constitute legal advice of any kind.
+    You should always verify all deadlines independently against the current Rules of Court 2021 and any applicable Practice Directions
+    issued by the Singapore courts. Court vacation dates and public holiday dates listed here are indicative only — please confirm
+    the applicable dates directly at <a href="https://www.judiciary.gov.sg" target="_blank" rel="noopener" style="color:inherit;">judiciary.gov.sg</a>
+    before acting on any deadline. If you are in any doubt as to the applicable deadline or procedure, you should consult a qualified Singapore lawyer.
+    <br><br>
+    <strong>Beta notice:</strong> This tool is currently in beta and may not yet reflect the full range of procedural timelines under the Rules of Court 2021.
+    If you encounter any errors, omissions, or inaccuracies, or if you have any suggestions for improvement, please send your feedback to
+    <a href="mailto:tanszeyao@gmail.com" style="color:inherit;">tanszeyao@gmail.com</a>.  </div>
+
+  <!-- Loading state (shown only if data.js fails to load) -->
+  <div id="loading-indicator" style="display:none;">
+    <p style="color:#c8102e;font-weight:600;padding:20px;">Error: data/data.js failed to load. Make sure all files are present in the same folder.</p>
+  </div>
+
+  <!-- App -->
+  <div id="app-content">
+
+    <!-- Step 1: Select trigger -->
+    <div class="card">
+      <h2><span class="step-badge">1</span> Select the Trigger Event</h2>
+
+      <div class="form-group">
+        <label for="trigger-select">Trigger Event</label>
+        <select id="trigger-select">
+          <option value="" disabled selected>— Choose a trigger event —</option>
+        </select>
+        <div id="trigger-note" class="trigger-note"></div>
+      </div>
+    </div>
+
+    <!-- Step 2: Enter date -->
+    <div class="card">
+      <h2><span class="step-badge">2</span> Enter the Trigger Date</h2>
+
+      <div class="form-group">
+        <label for="trigger-date">Date of Trigger Event</label>
+        <input type="date" id="trigger-date" />
+        <p class="helper-text">
+          Enter the actual date on which the trigger event occurred (e.g., date of service, date of judgment).
+          The period is counted from the <em>following</em> day (O 3 r 2, ROC 2021).
+        </p>
+      </div>
+
+      <div id="error-msg" style="display:none;color:#c8102e;font-size:0.88rem;font-weight:600;padding:8px 12px;background:#fff0f0;border-radius:6px;margin-top:4px;"></div>
+
+      <button class="btn-primary" id="calculate-btn">
+        ⚡ Calculate Deadlines
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="results-section">
+      <div class="card">
+        <div class="results-header">
+          <div>
+            <h2 style="margin-bottom:4px;">⏱ Calculated Deadlines</h2>
+            <div class="results-meta">
+              Trigger: <strong id="results-trigger-label">—</strong>
+              &nbsp;on&nbsp;
+              <strong id="results-trigger-date">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="results-container"></div>
+
+        <!-- Export bar -->
+        <div class="export-bar">
+          <p>Export all deadlines to your calendar (Outlook, Apple Calendar, Google Calendar):</p>
+          <button class="btn-secondary" id="export-btn">
+            📅 Export .ics File
+          </button>
+        </div>
+      </div>
+
+      <!-- Day-counting note -->
+      <div class="info-card">
+        <h3>How deadlines are calculated (O 2, ROC 2021 + Interpretation Act)</h3>
+        <ul>
+          <li><strong>Trigger day excluded:</strong> The period begins on the day <em>after</em> the triggering event (Interpretation Act s 50(a)).</li>
+          <li><strong>Periods of 5 days or fewer (O 2 r 3):</strong> Saturdays, Sundays, and public holidays are <em>excluded</em> from the count (effectively working days).</li>
+          <li><strong>Supreme Court, periods of 6–14 days (O 2 r 4):</strong> Court vacation days are also <em>excluded</em> from the count (the clock pauses). The computation mode is shown under each deadline.</li>
+          <li><strong>Periods over 14 days:</strong> All calendar days count; months and weeks are calendar months/weeks.</li>
+          <li><strong>Last-day rule:</strong> If the final day falls on a weekend, public holiday, or (SC) court vacation day, it extends to the next Registry-open day. Adjusted deadlines are marked &#9888;.</li>
+          <li><strong>State Courts:</strong> Vacation exclusion does not apply. Only the ≤5 day rule and last-day rule apply.</li>
+          <li><strong>Cutoff deadlines (shown in brown):</strong> Some deadlines run <em>backwards</em> from a future date (e.g. last day to amend before trial). If the cutoff falls on a non-filing day, the preceding filing day is shown.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /app-content -->
+
+</main>
+
+<footer>
+  Singapore Procedural Deadline Calculator &nbsp;·&nbsp;
+  Based on the Rules of Court 2021 (S 914/2021)
+  <br>
+  <span style="color:#c8102e;">Always verify all deadlines independently. This tool does not constitute legal advice.</span>
+</footer>
+
+<script src="./data/data.js"></script>
+<script src="./js/calculator.js"></script>
+<script src="./js/app.js"></script>
+
+</body>
+</html>
