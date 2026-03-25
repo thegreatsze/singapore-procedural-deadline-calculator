@@ -340,6 +340,9 @@ class DeadlineCalculator {
     const rangeStart = direction === 'before' ? deadline : trigger;
     const rangeEnd   = direction === 'before' ? trigger  : deadline;
 
+    const rawDeadlineStr      = result.rawDeadline;
+    const adjustedDeadlineStr = result.adjustedDeadline;
+
     const days = [];
     let current = new Date(rangeStart);
 
@@ -352,13 +355,26 @@ class DeadlineCalculator {
       const vacObj       = isVacation ? this._getVacation(current) : null;
       const vacationName = vacObj ? vacObj.name : null;
 
+      // Adjustment buffer: days that the last-day rule skipped over.
+      // "After" deadlines: raw deadline is pushed forward, buffer = days strictly between raw and adjusted.
+      // "Before" deadlines: cutoff is retreated backward, buffer = raw deadline itself (the non-filing day retreated from).
+      const inAfterBuffer  = result.wasAdjusted && direction !== 'before'
+        && dateStr > rawDeadlineStr && dateStr < adjustedDeadlineStr;
+      const inBeforeBuffer = result.wasAdjusted && direction === 'before'
+        && dateStr > adjustedDeadlineStr && dateStr <= rawDeadlineStr;
+
       let status;
       if (dateStr === triggerDateStr) {
         status = direction === 'before' ? 'trigger-event' : 'trigger';
-      } else if (dateStr === result.adjustedDeadline) {
+      } else if (dateStr === adjustedDeadlineStr) {
         status = 'deadline';
+      } else if (inAfterBuffer || inBeforeBuffer) {
+        // These days were skipped by the last-day rule — show their actual type
+        if (isWeekend)        status = 'skipped-weekend';
+        else if (isHoliday)   status = 'skipped-holiday';
+        else if (isVacation)  status = 'skipped-vacation';
+        else                  status = 'counted'; // fallback
       } else if (direction === 'before' || unit === 'months') {
-        // Pure calendar: all days in range count
         status = 'counted';
       } else if (effectiveDays <= 5) {
         // Mode A — working days

@@ -217,7 +217,6 @@
 
     const monthKeys = [...new Set(days.map(d => d.dateStr.slice(0, 7)))].sort();
 
-    const counted = days.filter(d => d.status === 'counted').length;
     const skippedWE  = days.filter(d => d.status === 'skipped-weekend').length;
     const skippedPH  = days.filter(d => d.status === 'skipped-holiday').length;
     const skippedCV  = days.filter(d => d.status === 'skipped-vacation').length;
@@ -265,21 +264,23 @@
       legend.appendChild(item);
     }
 
-    // Summary
+    // Summary — use the authoritative period label from the result rather than
+    // deriving the count from calendar statuses (which can be off-by-one).
     const summary = document.createElement('div');
     summary.className = 'cal-summary';
-    if (direction === 'before') {
-      summary.textContent = `${days.length - 2} calendar day${days.length - 2 !== 1 ? 's' : ''} between deadline and trigger event (pure calendar count).`;
+    const { result } = trace;
+    const periodDesc = direction === 'before'
+      ? `${escapeHtml(result.periodLabel)} before trigger event`
+      : escapeHtml(result.periodLabel);
+
+    if (totalSkipped > 0) {
+      const skipParts = [];
+      if (skippedWE > 0) skipParts.push(`${skippedWE} weekend day${skippedWE !== 1 ? 's' : ''}`);
+      if (skippedPH > 0) skipParts.push(`${skippedPH} public holiday${skippedPH !== 1 ? 's' : ''}`);
+      if (skippedCV > 0) skipParts.push(`${skippedCV} court vacation day${skippedCV !== 1 ? 's' : ''}`);
+      summary.textContent = `${periodDesc} · ${totalSkipped} day${totalSkipped !== 1 ? 's' : ''} not counted (${skipParts.join(', ')}).`;
     } else {
-      const parts = [`${counted} day${counted !== 1 ? 's' : ''} counted`];
-      if (totalSkipped > 0) {
-        const skipParts = [];
-        if (skippedWE > 0)  skipParts.push(`${skippedWE} weekend`);
-        if (skippedPH > 0)  skipParts.push(`${skippedPH} public holiday`);
-        if (skippedCV > 0)  skipParts.push(`${skippedCV} court vacation`);
-        parts.push(`${totalSkipped} day${totalSkipped !== 1 ? 's' : ''} skipped (${skipParts.join(', ')})`);
-      }
-      summary.textContent = parts.join(' · ') + '.';
+      summary.textContent = `${periodDesc} · all calendar days counted.`;
     }
 
     // Month grids
