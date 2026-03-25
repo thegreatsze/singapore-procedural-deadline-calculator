@@ -457,6 +457,213 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* ── Calculation Calendar ────────────────────────────────── */
+
+.cal-wrap {
+  border-top: 1px solid var(--border-light);
+}
+
+.cal-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  text-align: left;
+  font-family: var(--font);
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: var(--blue);
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.cal-toggle:hover { background: var(--blue-light); }
+
+.cal-inner {
+  padding: 24px 20px 32px;
+  background: #f8fafd;
+  border-top: 1px solid var(--border-light);
+}
+
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-bottom: 12px;
+}
+
+.cal-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.cal-swatch {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+.cal-swatch--trigger          { background: #1a5e38; }
+.cal-swatch--trigger-event    { background: #2c4a7c; }
+.cal-swatch--counted          { background: #c8ecd8; }
+.cal-swatch--deadline         { background: #c8102e; }
+.cal-swatch--skipped-weekend  { background: #ebebeb; }
+.cal-swatch--skipped-holiday  { background: #d0d0d0; }
+.cal-swatch--skipped-vacation { background: #d0e4f7; }
+
+.cal-summary {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.cal-months {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px 40px;
+}
+
+.cal-month { width: 320px; }
+
+.cal-month-hdr {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.cal-dow-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.cal-dow-cell {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-muted);
+  padding: 4px 0;
+  letter-spacing: 0.03em;
+}
+
+.cal-day-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.cal-cell {
+  position: relative;
+  aspect-ratio: 1;
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+  cursor: default;
+}
+
+.cal-cell--blank,
+.cal-cell--outside {
+  background: transparent;
+  border-color: transparent;
+  color: #ccc;
+}
+
+.cal-cell--counted {
+  background: #c8ecd8;
+  color: #145230;
+  font-weight: 500;
+  border-color: #a8d8bc;
+}
+
+.cal-cell--skipped-weekend {
+  background: #ebebeb;
+  color: #999;
+  border-color: #ddd;
+}
+
+.cal-cell--skipped-holiday {
+  background: #d0d0d0;
+  color: #555;
+  border-color: #bbb;
+}
+
+.cal-cell--skipped-vacation {
+  background: #d0e4f7;
+  color: #3a618a;
+  border-color: #b8d4f0;
+}
+
+.cal-cell--trigger,
+.cal-cell--trigger-event {
+  background: #1a5e38;
+  color: #fff;
+  font-weight: 700;
+  border-color: #145230;
+}
+
+.cal-cell--trigger-event {
+  background: #2c4a7c;
+  border-color: #1e3560;
+}
+
+.cal-cell--deadline {
+  background: #c8102e;
+  color: #fff;
+  font-weight: 700;
+  border-color: #a00c25;
+}
+
+/* Small badge (PH / CV) in bottom-right corner */
+.cal-cell[data-badge]::after {
+  content: attr(data-badge);
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+.cal-cell-num {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.cal-cell-lbl {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 3px;
+  opacity: 0.88;
+}
+
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media (max-width: 640px) {

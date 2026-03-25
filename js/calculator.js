@@ -311,6 +311,76 @@ class DeadlineCalculator {
     return triggerRule.deadlines.map(dl => this.calculate(triggerDateStr, dl, court));
   }
 
+  // ─── Calendar trace ────────────────────────────────────────────────────────
+
+  /**
+   * Returns a day-by-day trace for calendar visualization.
+   * Each entry: { dateStr, date, status, isWeekend, isHoliday, isVacation, holidayName, vacationName }
+   * Status values:
+   *   'trigger'          — trigger date (direction "after")
+   *   'trigger-event'    — trigger date (direction "before"; it is the future event)
+   *   'counted'          — day counted toward the period
+   *   'skipped-weekend'  — weekend, not counted (Mode A)
+   *   'skipped-holiday'  — public holiday, not counted (Mode A)
+   *   'skipped-vacation' — court vacation, not counted (Modes A & B)
+   *   'deadline'         — the adjusted deadline date
+   */
+  traceDeadline(triggerDateStr, rule, courtType) {
+    const result    = this.calculate(triggerDateStr, rule, courtType);
+    const trigger   = this._parseDate(triggerDateStr);
+    const deadline  = this._parseDate(result.adjustedDeadline);
+    const court     = courtType || 'supreme';
+    const unit      = rule.unit || 'days';
+    const direction = rule.direction || 'after';
+    const effectiveDays = unit === 'months' ? 9999
+      : unit === 'weeks' ? rule.days * 7
+      : rule.days;
+
+    // Chronological range
+    const rangeStart = direction === 'before' ? deadline : trigger;
+    const rangeEnd   = direction === 'before' ? trigger  : deadline;
+
+    const days = [];
+    let current = new Date(rangeStart);
+
+    while (current <= rangeEnd) {
+      const dateStr    = this._formatDate(current);
+      const isWeekend  = this._isWeekend(current);
+      const isHoliday  = this._isPublicHoliday(current);
+      const isVacation = this._isInVacation(current);
+      const holidayName  = isHoliday  ? (this._holidayMap.get(dateStr) || 'Public Holiday') : null;
+      const vacObj       = isVacation ? this._getVacation(current) : null;
+      const vacationName = vacObj ? vacObj.name : null;
+
+      let status;
+      if (dateStr === triggerDateStr) {
+        status = direction === 'before' ? 'trigger-event' : 'trigger';
+      } else if (dateStr === result.adjustedDeadline) {
+        status = 'deadline';
+      } else if (direction === 'before' || unit === 'months') {
+        // Pure calendar: all days in range count
+        status = 'counted';
+      } else if (effectiveDays <= 5) {
+        // Mode A — working days
+        if (isWeekend)                                  status = 'skipped-weekend';
+        else if (isHoliday)                             status = 'skipped-holiday';
+        else if (court === 'supreme' && isVacation)     status = 'skipped-vacation';
+        else                                            status = 'counted';
+      } else if (effectiveDays <= 14 && court === 'supreme') {
+        // Mode B — calendar days, skip vacation
+        status = isVacation ? 'skipped-vacation' : 'counted';
+      } else {
+        // Mode C — pure calendar
+        status = 'counted';
+      }
+
+      days.push({ dateStr, date: new Date(current), status, isWeekend, isHoliday, isVacation, holidayName, vacationName });
+      current.setDate(current.getDate() + 1);
+    }
+
+    return { days, triggerDateStr, deadlineDateStr: result.adjustedDeadline, direction, result };
+  }
+
   // ─── ICS export ───────────────────────────────────────────────────────────
 
   generateICS(results, triggerLabel, triggerDateStr) {
