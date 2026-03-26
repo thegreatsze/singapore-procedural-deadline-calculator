@@ -519,24 +519,24 @@ const SG_RULES_DATA = {
 
     {
       "id": "filing_noa_ca",
-      "label": "Filing of Notice of Appeal (to Court of Appeal / Appellate Division)",
+      "label": "Registry notifying parties that record of proceedings is available (Court of Appeal / Appellate Division)",
       "category": "appeals_hc_ca",
-      "reference": "O 19 rr 30\u201331, ROC 2021; Supreme Court Practice Directions 2021",
+      "reference": "O 19 r 30, ROC 2021",
       "courtType": "supreme",
       "deadlines": [
         {
           "id": "record_of_appeal_ca",
           "label": "File Record of Appeal",
-          "days": 2, "unit": "months",
+          "days": 8, "unit": "weeks",
           "reference": "O 19 r 30(1), ROC 2021",
-          "note": "The Appellant must file the Record of Appeal within 2 calendar months of filing the Notice of Appeal."
+          "note": "The Appellant must file the Record of Appeal within 8 weeks after the date on which the Registry informs the parties that the record of proceedings is available."
         },
         {
           "id": "appellants_case_ca",
           "label": "File Appellant\u2019s Case",
-          "days": 2, "unit": "months",
-          "reference": "O 19 r 30(2), ROC 2021; Supreme Court Practice Directions 2021",
-          "note": "Appellant\u2019s Case is filed simultaneously with the Record of Appeal, within 2 calendar months of filing the Notice of Appeal."
+          "days": 8, "unit": "weeks",
+          "reference": "O 19 r 30(2), ROC 2021",
+          "note": "Appellant\u2019s Case is filed simultaneously with the Record of Appeal, within 8 weeks after the date on which the Registry informs the parties that the record of proceedings is available."
         }
       ]
     },
@@ -630,24 +630,24 @@ const SG_RULES_DATA = {
 
     {
       "id": "filing_noa_state_courts",
-      "label": "Filing of Notice of Appeal (State Courts to High Court General Division)",
+      "label": "Registry notifying parties that record of proceedings is available (State Courts to High Court General Division)",
       "category": "appeals_sc_hc",
-      "reference": "O 19 rr 15\u201317, ROC 2021",
+      "reference": "O 19 rr 15\u201316, ROC 2021",
       "courtType": "state",
       "deadlines": [
         {
           "id": "roa_state",
           "label": "File Record of Appeal",
-          "days": 2, "unit": "months",
+          "days": 28, "unit": "days",
           "reference": "O 19 r 15(1), ROC 2021",
-          "note": "Appellant must file the Record of Appeal within 2 calendar months of filing the Notice of Appeal."
+          "note": "Appellant must file the Record of Appeal within 28 days after the date on which the Registry informs the parties that the record of proceedings is available."
         },
         {
           "id": "appellants_case_state",
           "label": "File Appellant\u2019s Case",
-          "days": 2, "unit": "months",
+          "days": 28, "unit": "days",
           "reference": "O 19 r 16(1), ROC 2021",
-          "note": "Appellant\u2019s Case is filed simultaneously with the Record of Appeal, within 2 calendar months of filing the Notice of Appeal."
+          "note": "Appellant\u2019s Case is filed simultaneously with the Record of Appeal, within 28 days after the date on which the Registry informs the parties that the record of proceedings is available."
         }
       ]
     },
